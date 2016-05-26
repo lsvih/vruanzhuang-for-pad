@@ -1,0 +1,117 @@
+.pictures {
+	width: 100%;
+	line-height: 1px;
+	-webkit-margin-before: 0!important;
+	-webkit-margin-after: 0!important;
+	-webkit-padding-start: 0!important;
+	margin: 0 auto;
+	position: relative;
+}
+
+.indexpic {
+	width: 100%;
+	position: relative;
+	height: 600px;
+}
+
+.margin180 {
+	margin-top: 180px;
+}
+
+.blankborder {
+	padding-left: 1px;
+}
+
+.active i {
+	transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	display: inline-block;
+}
+
+.right-boder {
+	border-right: 1px solid #d9d9d9;
+}
+
+.tab {
+	z-index: 10;
+	display: none;
+	position: fixed;
+	top: 79px;
+	width: 100%;
+	height: 245px;
+	background: rgba(250, 250, 250, 0.95);
+	overflow: hidden;
+}
+
+.selected {
+	border: 1px solid #df1a17!important;
+	color: #df1a17;
+}
+
+.pics img {
+	width: 100%;
+	height: auto;
+}
+
+.mui-preview-image.mui-fullscreen {
+	position: fixed;
+	z-index: 20;
+	background-color: #000;
+}
+
+.mui-content {
+	text-align: center;
+}
+
+.share {
+	width: 100%;
+	height: 26px;
+	position: fixed;
+	top: 10px;
+	color: #fff;
+}
+
+.love {
+	position: absolute;
+	right: 20px;
+	top: 3px;
+	line-height: 20px;
+}
+
+img {
+	width: 100%;
+	height: auto;
+}
+
+.title {
+	z-index: 999;
+	color: #000;
+	font-size: 30px;
+	font-weight: 700;
+	position: relative;
+	width: 100%;
+	height: 180px;
+	background-color: #fff;
+	line-height: 40px;
+	padding: 30px 50px 0 20px;
+}
+
+.dsn {
+	position: absolute;
+	top: 85px;
+	left: 20px;
+	color: #8F8F94;
+	font-weight: normal;
+}
+
+.scpr {
+	position: absolute;
+	top: 30px;
+	right: 20px;
+}
+
+.hr {
+	color: #eee;
+	font-size: 40px;
+	margin-right: 10px;
+}
