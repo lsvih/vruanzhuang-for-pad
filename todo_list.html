@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta content="email=no" name="format-detection" />
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script type="text/javascript" src="js/vue.js"></script>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<title>微软装</title>
+	</head>
+	<style>
+		.mui-numbox {
+			float: right;
+		}
+		
+		#select_num {
+			position: relative;
+			width: 80%;
+			height: 40px;
+			font-size: 20px;
+			margin-top: 20px;
+			color: #797979;
+		}
+		
+		.select_num_note {
+			margin-left: 10%;
+		}
+		
+		.item {
+			position: relative;
+			width: 90%;
+			margin-top: 40px;
+		}
+		
+		.item img {
+			width: 50%;
+		}
+		
+		.info {
+			position: absolute;
+			right: 0;
+			top: 20px;
+			font-size: 22px;
+			line-height: 30px;
+		}
+		
+		.item_name {
+			font-size: 25px;
+			color: #000;
+			font-weight: bold;
+		}
+		
+		.good_id {
+			display: none
+		}
+		
+		.good_sort_id {
+			display: none;
+		}
+		
+		.item_active {
+			color: red;
+			font-size: 20px;
+		}
+		
+		.item_tags {
+			position: relative;
+			width: 100%;
+			margin-bottom: 30px;
+			padding: 30px 20px;
+		}
+		
+		.tags_name {
+			font-size: 30px;
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		
+		.tag {
+			display: inline-block;
+			text-align: center;
+			line-height: 60px;
+			border: 1px solid#ACACB4;
+			height: 60px;
+			width: 120px;
+			margin-left: 30px;
+			margin-top: 20px;
+		}
+		
+		.selected_tag {
+			border: 3px solid#F0AD4E!important;
+		}
+	</style>
+
+	<body>
+		<div id="load">
+			<div class="loading"></div>
+			<div class="loading-text" style="text-align: center;">加载中，请稍候...</div>
+		</div>
+		<div id="select_num"><span class="select_num_note">购买<span id="type"></span>数量:</span>
+			<div class="mui-numbox" data-numbox-min='1'>
+				<button class="mui-btn mui-btn-numbox-minus" type="button" onclick="valueChange()">-</button>
+				<input class="mui-input-numbox" id="buy_num" type="number" value="1" onchange="valueChange()" />
+				<button class="mui-btn mui-btn-numbox-plus" type="button" onclick="valueChange()">+</button>
+			</div>
+		</div>
+		<HR style="border:3 double #987cb9" width="80%" color=#eee SIZE=3>
+		<div class="content">
+			<ul class="items">
+				<article class="item">
+
+					<img class="item_img" src="http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small">
+					<div class="info">
+						<span class="good_id">1</span>
+						<span class="good_sort_id">0</span>
+						<p class="item_name">云团沙发升级版</p>
+						<hr color=#eee>
+						<p class="item_price">选择属性后查看价格</p>
+						<p class="item_stock">选择属性后查看库存</p>
+
+					</div>
+					<div class="item_tags">
+						<div class="tags_name">颜色</div>
+						<span class="tag" onclick="select_a_tag(this)">红色</span>
+						<span class="tag" onclick="select_a_tag(this)">蓝色</span>
+
+					</div>
+					<div class="item_tags">
+						<div class="tags_name">大小</div>
+						<span class="tag" onclick="select_a_tag(this)">S</span>
+						<span class="tag" onclick="select_a_tag(this)">M</span>
+					</div>
+				</article>
+				<article class="item">
+
+					<img class="item_img" src="http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small">
+					<div class="info">
+						<span class="good_id">1</span>
+						<span class="good_sort_id">1</span>
+						<p class="item_name">云团沙发升级版</p>
+						<hr color=#eee>
+						<p class="item_price">选择属性后查看价格</p>
+						<p class="item_stock">选择属性后查看库存</p>
+
+					</div>
+					<div class="item_tags">
+						<div class="tags_name">颜色</div>
+						<span class="tag" onclick="select_a_tag(this)">红色</span>
+						<span class="tag" onclick="select_a_tag(this)">蓝色</span>
+
+					</div>
+					<div class="item_tags">
+						<div class="tags_name">大小</div>
+						<span class="tag" onclick="select_a_tag(this)">S</span>
+						<span class="tag" onclick="select_a_tag(this)">M</span>
+					</div>
+				</article>
+			</ul>
+		</div>
+
+	</body>
+	<script>
+		var buy_num = 1
+		var todo_data = JSON.parse(localStorage.tododata);
+		var type = null;
+		switch (todo_data.type) {
+			case "schemes":
+				type = "套餐"
+				break;
+			case "spaces":
+				type = "空间"
+				break;
+			case "goods":
+				type = "商品"
+				break;
+			default:
+				type = "";
+		}
+		document.getElementById("type").innerHTML = type;
+
+		function valueChange() {
+			buy_num = document.getElementById("buy_num").value;
+			for (var i = 0; i < todo_data.Total; i++) {
+				if (document.getElementsByClassName("item_price")[i].innerHTML != "选择属性后查看价格") {
+					judge_the_price_and_stock(i);
+				}
+			}
+		}
+
+		function changecolor() {
+			alltag = document.getElementsByClassName("tag");
+			for (var i = 0; i < alltag.length; i++) {
+				switch (alltag[i].innerText) {
+					case "红色":
+						change_ones_color(alltag[i], "red")
+						break;
+					case "蓝色":
+						change_ones_color(alltag[i], "blue")
+						break;
+					default:
+				}
+			}
+		}
+
+		function change_ones_color(e, f) {
+			e.style.backgroundColor = f;
+			e.style.color = f;
+			e.style.border = f;
+		}
+
+		function good_cout_tag_if_selected_finish(e) {
+			goodlen = e.getElementsByClassName("tags_name").length;
+			selectedgoodlen = e.getElementsByClassName("selected_tag").length;
+			wholelen = todo_data.Total;
+			return goodlen == selectedgoodlen // == true 则此商品选择完
+		}
+
+		function select_a_tag(e) {
+			e.setAttribute('class', 'tag selected_tag');
+			si_node = e.parentNode.getElementsByClassName("tag");
+			for (var i = 0; i < si_node.length; i++) {
+				if (si_node[i].innerHTML != e.innerHTML) {
+					si_node[i].className = "tag"
+				}
+			}
+			if (good_cout_tag_if_selected_finish(e.parentNode.parentNode)) {
+				judge_the_price_and_stock(e.parentNode.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
+			}
+		}
+
+		function judge_the_price_and_stock(e) {
+			var this_tag_list = [];
+			var this_good = document.getElementsByClassName("item")[e];
+			var this_unit_price;
+			var this_stock_num;
+			var this_pic;
+			for (var k = 0; k < this_good.getElementsByClassName("selected_tag").length; k++) {
+				this_tag_list.push(this_good.getElementsByClassName("selected_tag")[k].innerHTML);
+			}
+			thistag = todo_data.items[e].tag;
+			for (var j = 0; j < thistag.length; j++) {
+				var count = 0;
+				for (var i = 0; i < this_tag_list.length; i++) {
+					if (thistag[j].item[i].tag_name == this_tag_list[i]) {
+						count++;
+					}
+					if (count == this_tag_list.length) {
+						this_unit_price = thistag[j].unit_price;
+						this_stock_num = thistag[j].stock_num;
+						this_pic = thistag[j].img;
+					}
+				}
+			}
+			document.getElementsByClassName("item_price")[e].innerHTML = "￥" + this_unit_price;
+			document.getElementsByClassName("item_price")[e].setAttribute('class', 'item_price item_active');
+			if (buy_num > this_stock_num) {
+				document.getElementsByClassName("item_stock")[e].innerHTML = "本商品暂时缺货，请您耐心等待"
+			} else {
+				document.getElementsByClassName("item_stock")[e].innerHTML = "库存:" + this_stock_num
+			}
+			document.getElementsByClassName("item_img")[e].src = this_pic
+		}
+
+		function caculate_tag_attr() {}
+		//数据加载完后
+		changecolor()
+	</script>
+
+</html>

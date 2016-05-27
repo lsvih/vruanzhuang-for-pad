@@ -14,7 +14,7 @@
 		<script type="text/javascript" src="js/mui.min.js"></script>
 		<script type="text/javascript" src="js/mui.zoom.js"></script>
 		<script type="text/javascript" src="js/mui.previewimage.normaltype.js"></script>
-		
+
 		<link rel="stylesheet" href="css/mui.min.css" />
 		<link rel="stylesheet" href="css/app.css" />
 		<link rel="stylesheet" href="css/product.css" />
@@ -98,7 +98,7 @@
 
 			</div>
 
-			<div class="buy" onclick="addalltocart()"><i class="iconfont icon-buy"></i><span id="allprice">0</span>元起&nbsp;&nbsp;&nbsp;立即购买</div>
+			<div class="buy" onclick="popup()"><i class="iconfont icon-buy"></i><span id="allprice">0</span>元起&nbsp;&nbsp;&nbsp;立即购买</div>
 		</div>
 
 	</body>
@@ -120,7 +120,7 @@
 		mui.previewImage();
 
 		function setschemes() {
-			document.getElementById("cover").childNodes[0].src = serverurl +'/vrz/uploads/thumbs/m-' + jsonschemes.cover_img;
+			document.getElementById("cover").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.cover_img;
 			document.getElementById("title").innerHTML = jsonschemes.community;
 			if (!jsonschemes.bedroom) {
 				document.getElementById("woshi").style.display = "none";
@@ -167,9 +167,9 @@
 			} else {
 				document.getElementById("xiuxianqu").getElementsByTagName("span")[0].innerHTML = jsonschemes.lounge;
 			}
-			document.getElementById("inspiration").childNodes[0].src = serverurl +'/vrz/uploads/thumbs/m-'  + jsonschemes.inspiration_img;
-			document.getElementById("bright_spot").childNodes[0].src =serverurl + '/vrz/uploads/thumbs/m-'  + jsonschemes.bright_spot_img;
-			document.getElementById("color_analysis").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-'  + jsonschemes.color_analysis_img;
+			document.getElementById("inspiration").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.inspiration_img;
+			document.getElementById("bright_spot").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.bright_spot_img;
+			document.getElementById("color_analysis").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.color_analysis_img;
 			//document.getElementById("display_design").childNodes[0].src = jsonschemes.display_design_img;
 		}
 
@@ -187,15 +187,15 @@
 							compiled: function() {
 								tempnum = document.getElementsByClassName("productsnums");
 								tempprice = document.getElementsByClassName("productsunitprice");
-//								document.getElementById("allnum").innerHTML = 0;
+								//								document.getElementById("allnum").innerHTML = 0;
 								document.getElementById("allprice").innerHTML = 0;
-//								var tempallnum = 0;
+								//								var tempallnum = 0;
 								var tempallprice = 0;
 								for (i = 0; i < tempnum.length; i++) {
-//									tempallnum += parseInt(tempnum[i].innerHTML);
+									//									tempallnum += parseInt(tempnum[i].innerHTML);
 									tempallprice += parseInt(tempnum[i].innerHTML) * parseInt(tempprice[i].innerHTML);
 								}
-//								document.getElementById("allnum").innerHTML = tempallnum;
+								//								document.getElementById("allnum").innerHTML = tempallnum;
 								document.getElementById("allprice").innerHTML = tempallprice;
 							}
 						})
@@ -207,10 +207,9 @@
 				}
 			});
 		}
-		
 
 		function delnull() {
-		coverimg = document.getElementsByClassName("coverimg");
+			coverimg = document.getElementsByClassName("coverimg");
 			for (i = 0; i < coverimg.length; i++) {
 				if ((coverimg[i].src).slice(-4) == "null" || (coverimg[i].src).slice(-2) == "s-") {
 					coverimg[i].parentNode.parentNode.style.display = 'none'
@@ -247,24 +246,21 @@
 				}
 			}
 		}
-
-		function addalltocart() {
-			ids = document.getElementsByClassName("productsids");
-			names = document.getElementsByClassName("productsnames");
-			nums = document.getElementsByClassName("productsnums");
-			pris = document.getElementsByClassName("productsunitprice");
-			imgs = document.getElementsByClassName("productsimgs");
-
-			for (o = 0; o < ids.length; o++) {
-				cart(ids[o].innerHTML,names[o].innerHTML,nums[o].innerHTML,pris[o].innerHTML,imgs[o].src)
-			}
-			mui.alert('方案全部单品已加入购物车,请查看!')
-		}
-		
-		
-		function showproduct(e){
+		//		function addalltocart() {
+		//			ids = document.getElementsByClassName("productsids");
+		//			names = document.getElementsByClassName("productsnames");
+		//			nums = document.getElementsByClassName("productsnums");
+		//			pris = document.getElementsByClassName("productsunitprice");
+		//			imgs = document.getElementsByClassName("productsimgs");
+		//
+		//			for (o = 0; o < ids.length; o++) {
+		//				cart(ids[o].innerHTML,names[o].innerHTML,nums[o].innerHTML,pris[o].innerHTML,imgs[o].src)
+		//			}
+		//			mui.alert('方案全部单品已加入购物车,请查看!')
+		//		}
+		function showproduct(e) {
 			mui.openWindow({
-				url: "product.html?id="+e,
+				url: "product.html?id=" + e,
 				id: "product",
 				show: {
 					aniShow: 'slide-in-right',
@@ -272,7 +268,27 @@
 				}
 			});
 			return;
+		}
 
+		function popup() {
+			localStorage.tododata = '{"Total":"2","all_price":1025200,"type":"schemes","name":"舒适客厅","items":[{"name":"商品1","cover_img":"http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small","tags": [{"p_tag_id":1,"p_tag_name":"颜色","tags":[{"tag_id":2,"tag_name":"红色"}, {"tag_id":3,"tag_name":"蓝色"}]},{"p_tag_id":1,"p_tag_name":"大小","tag": [{"tag_id":2,"tag_name":"S"},{"tag_id":3,"tag_name":"M"}]}],"tag": [{"item":[{"tag_id":1,"tag_name":"红色"}, {"tag_id":3,"tag_name":"S"}],"img":"http://astatic.zaozuo.com.cn/655d2596d34a273f024f20cd103afd3b@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"蓝色"}, {"tag_id":3,"tag_name":"M"}],"img":"http://astatic.zaozuo.com.cn/736f6bd4023d44425b87458adcd8b37d@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"蓝色"}, {"tag_id":3,"tag_name":"S"}],"img":"http://astatic.zaozuo.com.cn/736f6bd4023d44425b87458adcd8b37d@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"红色"}, {"tag_id":3,"tag_name":"M"}],"img":"http://astatic.zaozuo.com.cn/655d2596d34a273f024f20cd103afd3b@!small","unit_price":1,"stock_num":1}]},{"name":"商品1","cover_img":"http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small","tags": [{"p_tag_id":1,"p_tag_name":"颜色","tags":[{"tag_id":2,"tag_name":"红色"}, {"tag_id":3,"tag_name":"蓝色"}]},{"p_tag_id":1,"p_tag_name":"大小","tag": [{"tag_id":2,"tag_name":"S"},{"tag_id":3,"tag_name":"M"}]}],"tag": [{"item":[{"tag_id":1,"tag_name":"红色"}, {"tag_id":3,"tag_name":"S"}],"img":"http://astatic.zaozuo.com.cn/655d2596d34a273f024f20cd103afd3b@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"蓝色"}, {"tag_id":3,"tag_name":"M"}],"img":"http://astatic.zaozuo.com.cn/736f6bd4023d44425b87458adcd8b37d@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"蓝色"}, {"tag_id":3,"tag_name":"S"}],"img":"http://astatic.zaozuo.com.cn/736f6bd4023d44425b87458adcd8b37d@!small","unit_price":1,"stock_num":1}, {"item":[{"tag_id":1,"tag_name":"红色"}, {"tag_id":3,"tag_name":"M"}],"img":"http://astatic.zaozuo.com.cn/655d2596d34a273f024f20cd103afd3b@!small","unit_price":1,"stock_num":1}]}]}'
+			wd = plus.webview.currentWebview().opener();
+			wd.setStyle({
+				mask: "rgba(0,0,0,0.7)"
+			});
+			mui.openWindow({
+				url: "popup.html",
+				id: "popup",
+				styles: {
+					top: '10%',
+					bottom: 0,
+				},
+				show: {
+					aniShow: 'slide-in-bottom',
+					duration: 300
+				}
+			});
+			return;
 		}
 	</script>
 

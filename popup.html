@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<link rel="stylesheet" href="css/product.css" />
+		<style type="text/css">
+			body,
+			.mui-content {
+				background-color: #fff;
+				color: #000;
+			}
+			
+			#close-btn {
+				z-index: 101;
+				position: fixed;
+				top: 20px;
+				right: 20px;
+			}
+			#todo_title{
+				z-index: 101;
+				position: fixed;
+				top:20px;
+				color: #8F8F94;
+				left:20px;
+				border: 1px solid#eee;
+				height: 50px;
+				line-height: 50px;
+				width: auto;
+				text-align: center;
+				font-size: 23px;
+				padding: 0 40px;
+			}
+			.header{
+				z-index: 100;
+				background-color: #fff;
+				position: fixed;
+				height: 80px;
+				width: 100%;
+				border-bottom: 1px solid#eee;
+			}
+			
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content">
+			<div id="todo_title">加载中...</div>
+			
+			<div id="close-btn"><img src="images/down.png" width="50px" height="50px"></div>
+			<div class="header"></div>
+			<div class="content"></div>
+			<div class="buy"><i class="iconfont icon-buy"></i><span id="allprice">0</span>元起&nbsp;&nbsp;&nbsp;立即下单</div>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script type="text/javascript" charset="utf-8">
+		mui.init({
+			swipeBack: false,
+			gestureConfig: {
+				doubletap: false
+			},
+			subpages: [{
+				id: 'todo_list',
+				url: 'todo_list.html',
+				styles: {
+					top: '80px',
+					bottom: '60px',
+					bounce: 'vertical'
+				}
+			}]
+		});
+			var todo_data = JSON.parse(localStorage.tododata)
+			var subWebview = null,
+				template = null,
+				index = null;
+			mui.plusReady(function() {
+				index = plus.webview.currentWebview().opener(); //主页面webview引用；
+				document.getElementById("allprice").innerText = todo_data.all_price/100;
+				document.getElementById("todo_title").innerHTML = todo_data.name;
+			})
+			/**
+			 * 关闭侧滑菜单
+			 */
+			function close() {
+				index.opener().setStyle({
+					mask: 'none'
+				});
+				mui.back()
+			}
+			//点击“关闭侧滑菜单”按钮处理逻辑
+			document.getElementById("close-btn").addEventListener("tap", close);
+		</script>
+	</body>
+
+</html>

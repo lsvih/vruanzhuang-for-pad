@@ -121,14 +121,14 @@ body {
 .buy{
 	position: fixed;
 	bottom: 0;
-	height: 50px;
+	height: 60px;
 	width: 100%;
 	background-color: #e60641;
 	font-size: 15px;
-	line-height: 50px;
+	line-height: 60px;
 	text-align: center;
 	color: #fff;
-	z-index: 9999;
+	z-index: 9;
 }
 .mui-preview-image.mui-fullscreen {
 	position: fixed;
