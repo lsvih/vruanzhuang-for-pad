@@ -40,6 +40,9 @@
 		
 		.item img {
 			width: 50%;
+			min-width: 50%;
+			min-height: 150px;
+			background-color: #eee;
 		}
 		
 		.info {
@@ -112,63 +115,44 @@
 		</div>
 		<HR style="border:3 double #987cb9" width="80%" color=#eee SIZE=3>
 		<div class="content">
-			<ul class="items">
+			<ul class="items" id="todo_list" v-for="good in items">
 				<article class="item">
 
-					<img class="item_img" src="http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small">
+					<img class="item_img" v-bind:src="good.cover_img">
 					<div class="info">
-						<span class="good_id">1</span>
-						<span class="good_sort_id">0</span>
-						<p class="item_name">云团沙发升级版</p>
-						<hr color=#eee>
+						<span class="good_id">{{good.id}}</span>
+						<span class="good_sort_id">{{ $index }}</span>
+						<p class="item_name">{{good.name}}</p>
+						<hr color="#eee">
 						<p class="item_price">选择属性后查看价格</p>
 						<p class="item_stock">选择属性后查看库存</p>
 
 					</div>
+					<span v-for="type in good.tags">
 					<div class="item_tags">
-						<div class="tags_name">颜色</div>
-						<span class="tag" onclick="select_a_tag(this)">红色</span>
-						<span class="tag" onclick="select_a_tag(this)">蓝色</span>
+						<div class="tags_name">{{type.p_tag_name}}</div>
+						<span v-for="tag in type.tags">
+								<span class="tag" onclick="select_a_tag(this)">{{tag.tag_name}}</span>
+					</span>
+		</div>
+		</span>
+		</article>
 
-					</div>
-					<div class="item_tags">
-						<div class="tags_name">大小</div>
-						<span class="tag" onclick="select_a_tag(this)">S</span>
-						<span class="tag" onclick="select_a_tag(this)">M</span>
-					</div>
-				</article>
-				<article class="item">
-
-					<img class="item_img" src="http://astatic.zaozuo.com.cn/3f8cff439295513be3fd55d7f6b95550@!small">
-					<div class="info">
-						<span class="good_id">1</span>
-						<span class="good_sort_id">1</span>
-						<p class="item_name">云团沙发升级版</p>
-						<hr color=#eee>
-						<p class="item_price">选择属性后查看价格</p>
-						<p class="item_stock">选择属性后查看库存</p>
-
-					</div>
-					<div class="item_tags">
-						<div class="tags_name">颜色</div>
-						<span class="tag" onclick="select_a_tag(this)">红色</span>
-						<span class="tag" onclick="select_a_tag(this)">蓝色</span>
-
-					</div>
-					<div class="item_tags">
-						<div class="tags_name">大小</div>
-						<span class="tag" onclick="select_a_tag(this)">S</span>
-						<span class="tag" onclick="select_a_tag(this)">M</span>
-					</div>
-				</article>
-			</ul>
+		</ul>
 		</div>
 
 	</body>
 	<script>
-		var buy_num = 1
+		var buy_num = 1;
 		var todo_data = JSON.parse(localStorage.tododata);
 		var type = null;
+		mui.ready(function() {
+			list = new Vue({
+				el: '#todo_list',
+				data: todo_data
+			});
+			changecolor();
+		});
 		switch (todo_data.type) {
 			case "schemes":
 				type = "套餐"
@@ -214,23 +198,16 @@
 			e.style.border = f;
 		}
 
-		function good_cout_tag_if_selected_finish(e) {
-			goodlen = e.getElementsByClassName("tags_name").length;
-			selectedgoodlen = e.getElementsByClassName("selected_tag").length;
-			wholelen = todo_data.Total;
-			return goodlen == selectedgoodlen // == true 则此商品选择完
-		}
-
 		function select_a_tag(e) {
 			e.setAttribute('class', 'tag selected_tag');
-			si_node = e.parentNode.getElementsByClassName("tag");
+			si_node = e.parentNode.parentNode.getElementsByClassName("tag");
 			for (var i = 0; i < si_node.length; i++) {
 				if (si_node[i].innerHTML != e.innerHTML) {
 					si_node[i].className = "tag"
 				}
 			}
-			if (good_cout_tag_if_selected_finish(e.parentNode.parentNode)) {
-				judge_the_price_and_stock(e.parentNode.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
+			if (e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tags_name").length == e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tag selected_tag").length) {
+				judge_the_price_and_stock(e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
 			}
 		}
 
@@ -259,17 +236,9 @@
 			}
 			document.getElementsByClassName("item_price")[e].innerHTML = "￥" + this_unit_price;
 			document.getElementsByClassName("item_price")[e].setAttribute('class', 'item_price item_active');
-			if (buy_num > this_stock_num) {
-				document.getElementsByClassName("item_stock")[e].innerHTML = "本商品暂时缺货，请您耐心等待"
-			} else {
-				document.getElementsByClassName("item_stock")[e].innerHTML = "库存:" + this_stock_num
-			}
-			document.getElementsByClassName("item_img")[e].src = this_pic
+			buy_num > this_stock_num ? document.getElementsByClassName("item_stock")[e].innerHTML = "本商品暂时缺货，请您耐心等待" : document.getElementsByClassName("item_stock")[e].innerHTML = "库存:" + this_stock_num;
+			document.getElementsByClassName("item_img")[e].src = this_pic;
 		}
-
-		function caculate_tag_attr() {}
-		//数据加载完后
-		changecolor()
 	</script>
 
 </html>
