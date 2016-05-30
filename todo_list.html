@@ -209,6 +209,9 @@
 			if (e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tags_name").length == e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tag selected_tag").length) {
 				judge_the_price_and_stock(e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
 			}
+			if (document.getElementsByClassName("tags_name").length == document.getElementsByClassName("tag selected_tag").length) {
+				calculate_all_price();
+			}
 		}
 
 		function judge_the_price_and_stock(e) {
@@ -238,6 +241,17 @@
 			document.getElementsByClassName("item_price")[e].setAttribute('class', 'item_price item_active');
 			buy_num > this_stock_num ? document.getElementsByClassName("item_stock")[e].innerHTML = "本商品暂时缺货，请您耐心等待" : document.getElementsByClassName("item_stock")[e].innerHTML = "库存:" + this_stock_num;
 			document.getElementsByClassName("item_img")[e].src = this_pic;
+		}
+		
+		
+		function calculate_all_price(){
+			var price = document.getElementsByClassName("item_price");
+			var sum = 0;
+			var palpage = plus.webview.currentWebview().opener();
+			for(i=0;i<price.length;i++){
+				sum += parseInt(price[i].innerHTML.substring(1));
+			}
+			mui.fire(palpage,'price',{price:sum});
 		}
 	</script>
 

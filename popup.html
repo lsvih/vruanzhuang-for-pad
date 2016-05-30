@@ -55,7 +55,7 @@
 			<div id="close-btn"><img src="images/down.png" width="50px" height="50px"></div>
 			<div class="header"></div>
 			<div class="content"></div>
-			<div class="buy"><i class="iconfont icon-buy"></i><span id="allprice">0</span>元起&nbsp;&nbsp;&nbsp;立即下单</div>
+			<div class="buy"><i class="iconfont icon-buy"></i><span id="allprice">0</span>元<span id="accurate_price">起</span>&nbsp;&nbsp;&nbsp;立即下单</div>
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script type="text/javascript" charset="utf-8">
@@ -74,6 +74,12 @@
 				}
 			}]
 		});
+
+		window.addEventListener('price',function(event){
+            document.getElementById("allprice").innerHTML = event.detail.price;
+            document.getElementById("accurate_price").innerHTML = "";
+        });
+
 			var todo_data = JSON.parse(localStorage.tododata)
 			var subWebview = null,
 				template = null,
