@@ -90,7 +90,7 @@
 				document.getElementById("todo_title").innerHTML = todo_data.name;
 			})
 			/**
-			 * 关闭侧滑菜单
+			 * 关闭弹出层
 			 */
 			function close() {
 				index.opener().setStyle({
@@ -98,7 +98,6 @@
 				});
 				mui.back()
 			}
-			//点击“关闭侧滑菜单”按钮处理逻辑
 			document.getElementById("close-btn").addEventListener("tap", close);
 		</script>
 	</body>
