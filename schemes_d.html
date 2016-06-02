@@ -170,7 +170,6 @@
 			document.getElementById("inspiration").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.inspiration_img;
 			document.getElementById("bright_spot").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.bright_spot_img;
 			document.getElementById("color_analysis").childNodes[0].src = serverurl + '/vrz/uploads/thumbs/m-' + jsonschemes.color_analysis_img;
-			//document.getElementById("display_design").childNodes[0].src = jsonschemes.display_design_img;
 		}
 
 		function getspacedata() {
@@ -187,15 +186,11 @@
 							compiled: function() {
 								tempnum = document.getElementsByClassName("productsnums");
 								tempprice = document.getElementsByClassName("productsunitprice");
-								//								document.getElementById("allnum").innerHTML = 0;
 								document.getElementById("allprice").innerHTML = 0;
-								//								var tempallnum = 0;
 								var tempallprice = 0;
 								for (i = 0; i < tempnum.length; i++) {
-									//									tempallnum += parseInt(tempnum[i].innerHTML);
 									tempallprice += parseInt(tempnum[i].innerHTML) * parseInt(tempprice[i].innerHTML);
 								}
-								//								document.getElementById("allnum").innerHTML = tempallnum;
 								document.getElementById("allprice").innerHTML = tempallprice;
 							}
 						})
@@ -246,18 +241,7 @@
 				}
 			}
 		}
-		//		function addalltocart() {
-		//			ids = document.getElementsByClassName("productsids");
-		//			names = document.getElementsByClassName("productsnames");
-		//			nums = document.getElementsByClassName("productsnums");
-		//			pris = document.getElementsByClassName("productsunitprice");
-		//			imgs = document.getElementsByClassName("productsimgs");
-		//
-		//			for (o = 0; o < ids.length; o++) {
-		//				cart(ids[o].innerHTML,names[o].innerHTML,nums[o].innerHTML,pris[o].innerHTML,imgs[o].src)
-		//			}
-		//			mui.alert('方案全部单品已加入购物车,请查看!')
-		//		}
+
 		function showproduct(e) {
 			mui.openWindow({
 				url: "product.html?id=" + e,

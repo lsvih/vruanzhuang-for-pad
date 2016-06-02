@@ -199,6 +199,7 @@
 		}
 
 		function select_a_tag(e) {
+			var k = e.parentNode.parentNode.parentNode;
 			e.setAttribute('class', 'tag selected_tag');
 			si_node = e.parentNode.parentNode.getElementsByClassName("tag");
 			for (var i = 0; i < si_node.length; i++) {
@@ -206,8 +207,8 @@
 					si_node[i].className = "tag"
 				}
 			}
-			if (e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tags_name").length == e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("tag selected_tag").length) {
-				judge_the_price_and_stock(e.parentNode.parentNode.parentNode.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
+			if (k.parentNode.getElementsByClassName("tags_name").length == k.parentNode.getElementsByClassName("tag selected_tag").length) {
+				judge_the_price_and_stock(k.parentNode.getElementsByClassName("good_sort_id")[0].innerHTML)
 			}
 			if (document.getElementsByClassName("tags_name").length == document.getElementsByClassName("tag selected_tag").length) {
 				calculate_all_price();

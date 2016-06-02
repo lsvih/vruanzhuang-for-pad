@@ -81,9 +81,9 @@
         });
 
 			var todo_data = JSON.parse(localStorage.tododata)
-			var subWebview = null,
-				template = null,
-				index = null;
+			var subWebview,
+				template,
+				index;
 			mui.plusReady(function() {
 				index = plus.webview.currentWebview().opener(); //主页面webview引用；
 				document.getElementById("allprice").innerText = todo_data.all_price/100;
