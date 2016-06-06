@@ -36,6 +36,21 @@
 			mui.back()
 			return;
 		});
+		mui.init({
+			swipeBack: false,
+			gestureConfig: {
+				doubletap: false
+			},
+			subpages: [{
+				id: 'match_step1',
+				url: 'match_step1.html',
+				styles: {
+					top: '70px',
+					bottom: 0,
+					bounce: 'vertical'
+				}
+			}]
+		});
 	</script>
 
 </html>

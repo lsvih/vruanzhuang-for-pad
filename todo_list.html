@@ -175,6 +175,9 @@
 					judge_the_price_and_stock(i);
 				}
 			}
+			if (document.getElementsByClassName("tags_name").length == document.getElementsByClassName("tag selected_tag").length) {
+				calculate_all_price();
+			}
 		}
 
 		function changecolor() {
@@ -252,7 +255,7 @@
 			for(i=0;i<price.length;i++){
 				sum += parseInt(price[i].innerHTML.substring(1));
 			}
-			mui.fire(palpage,'price',{price:sum});
+			mui.fire(palpage,'price',{price:sum*document.getElementById("buy_num").value});
 		}
 	</script>
 

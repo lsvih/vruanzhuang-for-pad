@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="pragram" content="no-cache">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta content="email=no" name="format-detection" />
+		<script type="text/javascript" src="js/vue.js"></script>
+		<script type="text/javascript" src="js/app.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+		<script type="text/javascript" src="js/mui.min.js"></script>
+		<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/mui.picker.js"></script>
+		<script src="js/mui.poppicker.js"></script>
+		<link rel="stylesheet" href="css/mui.min.css" />
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="css/cart.css" />
+		<link href="css/mui.picker.css" rel="stylesheet" />
+		<link href="css/mui.poppicker.css" rel="stylesheet" />
+		<title>微软装</title>
+	</head>
+
+	<body>
+		<div id="load">
+			<div class="loading"></div>
+			<div class="loading-text"><img src="images/load.gif" width="25px">加载中，请稍候...</div>
+		</div>
+		<button id='pickcity' class="mui-btn mui-btn-block" type='button'><span id="province"></span><span id="city"></span><span id="county"></span></button>
+
+	</body>
+	<script>
+		(function($, doc) {
+			$.init();
+			$.ready(function() {
+				var pickcity = new $.PopPicker({
+					layer: 3
+				});
+				pickcity.setData(cityData3);
+				var showbtn = doc.getElementById('pickcity');
+				showbtn.addEventListener('tap', function(event) {
+					pickcity.show(function(items) {
+						document.getElementById("province").innerHTML = (items[0] || {}).text;
+						document.getElementById("city").innerHTML = (items[1] || {}).text;
+						document.getElementById("county").innerHTML = (items[2] || {}).text;
+					});
+				}, false);
+			});
+		})(mui, document);
+	</script>
+
+</html>
